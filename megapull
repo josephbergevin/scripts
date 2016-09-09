@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Usage examples:
+#   1. updt nozzle-app queues 'rankings-audit: increased max_concurrent to 3 bajillion'
+#   2. updt nozzle-app cron 'changed DailyIntegrity time to 11:30pm UTC'
+set -e
+
+echo "pulling nozzle megarepo..."
+cd $GOPATH/src/github.com/nozzle/nozzle
+git pull
+
+echo "megapull complete"
+
+notify-send -u normal "MegaPull" "Completed pulling for 'MegaRepo'"

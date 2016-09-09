@@ -1,0 +1,134 @@
+#!/bin/sh
+
+set -e
+
+SHORTCUT="$1"
+ACTION="$2"
+
+case "$SHORTCUT" in
+
+  nozzle)
+    echo "jumping to nozzle..."
+    cd $GOPATH/src/github.com/nozzle/nozzle
+    ;;
+  joe)
+    echo "jumping to josephbergevin..."
+    cd /home/joseph/Dropbox/Code/localserver/CurrentEnvironment/gopath/src/github.com/josephbergevin
+    ;;
+  rankings)
+    echo "jumping to rankings..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/rankings
+    ;;
+  urls)
+    echo "jumping to urls..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/urls
+    ;;
+  api)
+    echo "jumping to api..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/api
+    ;;
+  nozbot)
+    echo "jumping to nozbot..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/nozbot
+    ;;
+  nzurls)
+    echo "jumping to nz--urls..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/legacy/nz--urls
+    ;;
+  keywordmetrics)
+    echo "jumping to keyword metrics..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/keywordmetrics
+    ;;
+  locales)
+    echo "jumping to locales..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/locales
+    ;;
+  keywords)
+    echo "jumping to keywords..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/models/keywords
+    ;;
+  nzkeywords)
+    echo "jumping to nz-keywords..."
+    cd $GOPATH/src/github.com/nozzle/nz-keywords
+    ;;
+  sentiment)
+    echo "jumping to sentiment..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/sentiment
+    ;;
+  alerts)
+    echo "jumping to alerts..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/alerts
+    ;;
+  apache)
+    echo "jumping to seocom:apache..."
+    cd /home/joseph/devenv/seocom/Apache
+    ;;
+  devenv)
+    echo "jumping to devenv..."
+    cd /home/joseph/devenv
+    ;;
+  logs)
+    echo "jumping to seocom:logs..."
+    cd /home/joseph/SITES/docker/apache2/logs
+    ;;
+  domainmarket)
+    echo "jumping to seocom:domainmarket..."
+    cd /home/joseph/SITES/docker/www/public_html/domainmarket/public_html
+    ;;
+  dmv2)
+    echo "jumping to seocom:domainmarketV2..."
+    cd /home/joseph/web/sites/domainmarketV2
+    ;;
+  theone)
+    echo "jumping to seocom:TheOne..."
+    cd /home/joseph/web/sites/theone
+    ;;
+  homestead)
+    echo "jumping to seocom:homestead..."
+    cd /home/joseph/web/Homestead
+    ;;
+  laravel)
+    echo "jumping to seocom:laravel environment..."
+    cd /home/joseph/web/sites
+    ;;
+  fresher)
+    echo "jumping to seocom:fresher..."
+    cd /home/joseph/web/sites/fresher
+    ;;
+  scripts)
+    echo "jumping to scripts..."
+    cd /home/joseph/scripts
+    ;;
+  *)
+    echo "Unknown shortcut '$SHORTCUT'"
+    echo "Available Shortcuts: 'nozzle', 'joe', 'rankings', 'urls', 'api', 'nozbot', 'nzurls', 'keywords', 'nzkeywords', 'keyword', 'sentiment', 'scripts'"
+    ACTION=""
+    ;;
+
+esac
+
+case "$ACTION" in
+
+  atom)
+    echo "opening in atom..."
+    notify-send "opening $SHORTCUT in atom..."
+    atom .
+    ;;
+  subl)
+    echo "opening in sublime-text..."
+    notify-send "opening $SHORTCUT in Sublime Text..."
+    subl .
+    ;;
+  code)
+    echo "opening in vs code..."
+    notify-send "opening $SHORTCUT in VS Code..."
+    code .
+    ;;
+  files)
+    echo "opening in file explorer..."
+    notify-send "opening $SHORTCUT in Files (explorer)..."
+    nautilus . 2> /dev/null
+    ;;
+
+
+esac

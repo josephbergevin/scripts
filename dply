@@ -1,0 +1,131 @@
+#!/bin/bash
+
+TIMESTAMP=$(date +%y%m%d%H%M)
+SERVER="$1"
+
+
+DPLYSCRIPT=""
+DPLYPATH=""
+
+set -e
+
+case "$SERVER" in
+
+  api)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying api..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/api/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "API Binary Complete" "The binary has finished compiling. Now deploying api to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "API Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`api\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  rankings)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying rankings..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/rankings/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "Rankings Binary Complete" "The binary has finished compiling. Now deploying rankings to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "Rankings Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`rankings\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  urls)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying urls..."
+    cd $GOPATH/src/github.com/nozzle/urls/module/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "URLs Binary Complete" "The binary has finished compiling. Now deploying urls to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "URLs Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`urls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  sentiment)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying sentiment..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/sentiment/server/module/main/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "Seniment Binary Complete" "The binary has finished compiling. Now deploying sentiment to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "Seniment Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`sentiment\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  alerts)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying alerts..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/alerts/server/module/main/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "Alerts Service Binary Complete" "The binary has finished compiling. Now deploying alerts service to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "Alerts Service Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`alerts service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  keyword)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying keyword..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/keyword/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "Keyword Service Binary Complete" "The binary has finished compiling. Now deploying keyword service to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "Keyword Service Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`keyword service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  keywordmetrics)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying keywordmetrics..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/keywordmetrics/server/module/main
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "KeywordMetrics Service Binary Complete" "The binary has finished compiling. Now deploying keywordmetrics service to version: $VERSION ..."
+    gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "KeywordMetrics Service Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`keywordmetrics service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  notify)
+    MESSAGE="$2"
+    echo "deploying notify..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/notify/
+    appcfg.py -A nozzle-app -V notify update .
+    notify-send -u normal "Notify Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`notify\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  nozbot)
+    MESSAGE="$2"
+    echo "deploying nozbot..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/services/nozbot/
+    appcfg.py -A nozzle-app -V badabing update .
+    notify-send -u normal "NozBot Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`nozbot\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  nzurls)
+    VERSION="$2-v$TIMESTAMP"
+    MESSAGE="$3"
+    echo "deploying nzurls..."
+    cd $GOPATH/src/github.com/nozzle/nozzle/legacy/nzurls/modules/default/
+    echo "compiling binary..."
+    GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o main_linux64
+    notify-send -u low "Binary Complete: nzurls" "The binary has finished compiling. Now deploying nzurls to version: $VERSION ..."
+    gcloud --verbosity info --project nz--urls app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
+    notify-send -u normal "NzURLs Deployment Complete" "User message for slack: $MESSAGE"
+    slack chat:post-message go "Deployed *\`nzurls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    ;;
+  *)
+    echo "Unknown shortcut $SHORTCUT"
+    echo "Available Shortcuts: 'rankings', 'nozbot', 'nzurls', 'urls', 'sentiment', 'alerts', 'keyword', 'notify'"
+    ;;
+
+esac

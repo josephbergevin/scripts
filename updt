@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Usage examples:
+#   1. updt nozzle-app queues 'rankings-audit: increased max_concurrent to 3 bajillion'
+#   2. updt nozzle-app cron 'changed DailyIntegrity time to 11:30pm UTC'
+set -e
+SERVER="$1"
+UPDATE_TYPE="$2"
+MESSAGE="$3"
+
+# Determine the string for Cron/Queues
+TYPE_MESSAGE=""
+FILENAME=""
+case "$UPDATE_TYPE" in
+
+  queues)
+    TYPE_MESSAGE="Queues"
+    FILENAME="queue.yaml"
+    ;;
+  cron)
+    TYPE_MESSAGE="Crons"
+    FILENAME="cron.yaml"
+    ;;
+  *)
+    echo "Unknown UPDATE_TYPE '$UPDATE_TYPE'"
+    echo "Available types: 'queues', 'cron'"
+    exit 1
+    ;;
+
+esac
+
+# filled in case statement below
+SERVER_NAME=""
+
+case "$SERVER" in
+
+  nozzle-app)
+    SERVER_NAME="nozzle-app"
+    echo "Updating $TYPE_MESSAGE for $SERVER_NAME"
+    cd $GOPATH/src/github.com/nozzle/nozzle/services
+    ;;
+  nzurls)
+    SERVER_NAME="nz--urls"
+    echo "Updating $TYPE_MESSAGE for $SERVER_NAME"
+    cd $GOPATH/src/github.com/nozzle/nozzle/legacy/nzurls/modules
+    ;;
+  *)
+    echo "Unknown SERVER_NAME '$SERVER'"
+    echo "Available names: 'nozzle-app', 'nzurls'"
+    exit 1
+    ;;
+
+esac
+
+appcfg.py update_"$UPDATE_TYPE" .
+notify-send -u normal "$TYPE_MESSAGE Updated for $SERVER_NAME" "User message for slack: $MESSAGE"
+git add "$FILENAME"
+git commit -m"$FILENAME: $MESSAGE"
+git pull origin master
+git push origin master
+slack chat:post-message go "*$TYPE_MESSAGE Updated* for *\`$SERVER_NAME\`* \`\`\`$MESSAGE\`\`\`" --username=joebot
