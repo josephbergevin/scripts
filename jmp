@@ -71,29 +71,25 @@ case "$SHORTCUT" in
     echo "jumping to seocom:logs..."
     cd /home/joseph/SITES/docker/apache2/logs
     ;;
-  domainmarket)
-    echo "jumping to seocom:domainmarket..."
-    cd /home/joseph/SITES/docker/www/public_html/domainmarket/public_html
-    ;;
   dmv2)
     echo "jumping to seocom:domainmarketV2..."
-    cd /home/joseph/web/sites/domainmarketV2
+    cd /data-ext/web/sites/domainmarketV2
     ;;
   theone)
     echo "jumping to seocom:TheOne..."
-    cd /home/joseph/web/sites/theone
+    cd /data-ext/web/sites/theone
     ;;
   homestead)
     echo "jumping to seocom:homestead..."
-    cd /home/joseph/web/Homestead
+    cd /data-ext/web/Homestead
     ;;
   laravel)
     echo "jumping to seocom:laravel environment..."
-    cd /home/joseph/web/sites
+    cd /data-ext/web/sites
     ;;
   fresher)
     echo "jumping to seocom:fresher..."
-    cd /home/joseph/web/sites/fresher
+    cd /data-ext/web/sites/fresher
     ;;
   scripts)
     echo "jumping to scripts..."
