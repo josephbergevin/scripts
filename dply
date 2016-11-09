@@ -21,7 +21,7 @@ case "$SERVER" in
     notify-send -u low "API Binary Complete" "The binary has finished compiling. Now deploying api to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "API Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`api\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`api\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   rankings)
     VERSION="$2-v$TIMESTAMP"
@@ -33,7 +33,7 @@ case "$SERVER" in
     notify-send -u low "Rankings Binary Complete" "The binary has finished compiling. Now deploying rankings to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "Rankings Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`rankings\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`rankings\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   urls)
     VERSION="$2-v$TIMESTAMP"
@@ -45,7 +45,7 @@ case "$SERVER" in
     notify-send -u low "URLs Binary Complete" "The binary has finished compiling. Now deploying urls to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "URLs Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`urls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`urls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   sentiment)
     VERSION="$2-v$TIMESTAMP"
@@ -57,7 +57,7 @@ case "$SERVER" in
     notify-send -u low "Seniment Binary Complete" "The binary has finished compiling. Now deploying sentiment to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "Seniment Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`sentiment\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`sentiment\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   alerts)
     VERSION="$2-v$TIMESTAMP"
@@ -69,7 +69,7 @@ case "$SERVER" in
     notify-send -u low "Alerts Service Binary Complete" "The binary has finished compiling. Now deploying alerts service to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "Alerts Service Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`alerts service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`alerts service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   keyword)
     VERSION="$2-v$TIMESTAMP"
@@ -81,7 +81,7 @@ case "$SERVER" in
     notify-send -u low "Keyword Service Binary Complete" "The binary has finished compiling. Now deploying keyword service to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "Keyword Service Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`keyword service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`keyword service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   keywordmetrics)
     VERSION="$2-v$TIMESTAMP"
@@ -93,7 +93,7 @@ case "$SERVER" in
     notify-send -u low "KeywordMetrics Service Binary Complete" "The binary has finished compiling. Now deploying keywordmetrics service to version: $VERSION ..."
     gcloud --verbosity info --project nozzle-app app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "KeywordMetrics Service Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`keywordmetrics service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`keywordmetrics service\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   notify)
     MESSAGE="$2"
@@ -101,7 +101,7 @@ case "$SERVER" in
     cd $GOPATH/src/github.com/nozzle/nozzle/services/notify/
     appcfg.py -A nozzle-app -V notify update .
     notify-send -u normal "Notify Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`notify\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`notify\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   nozbot)
     MESSAGE="$2"
@@ -109,7 +109,7 @@ case "$SERVER" in
     cd $GOPATH/src/github.com/nozzle/nozzle/services/nozbot/
     appcfg.py -A nozzle-app -V badabing update .
     notify-send -u normal "NozBot Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`nozbot\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`nozbot\`* classic ae box \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   nzurls)
     VERSION="$2-v$TIMESTAMP"
@@ -121,7 +121,7 @@ case "$SERVER" in
     notify-send -u low "Binary Complete: nzurls" "The binary has finished compiling. Now deploying nzurls to version: $VERSION ..."
     gcloud --verbosity info --project nz--urls app deploy --version "$VERSION" ./app.yaml <<< $'y\n'
     notify-send -u normal "NzURLs Deployment Complete" "User message for slack: $MESSAGE"
-    slack chat:post-message go "Deployed *\`nzurls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
+    slack-cli chat:post-message go "Deployed *\`nzurls\`* to version: _\`$VERSION\`_ \`\`\`$MESSAGE\`\`\`" --username=joebot
     ;;
   *)
     echo "Unknown shortcut $SHORTCUT"

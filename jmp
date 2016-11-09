@@ -73,23 +73,23 @@ case "$SHORTCUT" in
     ;;
   dmv2)
     echo "jumping to seocom:domainmarketV2..."
-    cd /data-ext/web/sites/domainmarketV2
+    cd /home/joseph/web/sites/domainmarketV2
     ;;
   theone)
     echo "jumping to seocom:TheOne..."
-    cd /data-ext/web/sites/theone
+    cd /home/joseph/web/sites/theone
     ;;
   homestead)
     echo "jumping to seocom:homestead..."
-    cd /data-ext/web/Homestead
+    cd /home/joseph/web/Homestead
     ;;
   laravel)
     echo "jumping to seocom:laravel environment..."
-    cd /data-ext/web/sites
+    cd /home/joseph/web/sites
     ;;
   fresher)
     echo "jumping to seocom:fresher..."
-    cd /data-ext/web/sites/fresher
+    cd /home/joseph/web/sites/fresher
     ;;
   scripts)
     echo "jumping to scripts..."

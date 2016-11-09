@@ -58,4 +58,4 @@ git add "$FILENAME"
 git commit -m"$FILENAME: $MESSAGE"
 git pull origin master
 git push origin master
-slack chat:post-message go "*$TYPE_MESSAGE Updated* for *\`$SERVER_NAME\`* \`\`\`$MESSAGE\`\`\`" --username=joebot
+slack-cli chat:post-message go "*$TYPE_MESSAGE Updated* for *\`$SERVER_NAME\`* \`\`\`$MESSAGE\`\`\`" --username=joebot
