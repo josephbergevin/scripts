@@ -1,0 +1,19 @@
+#!/bin/bash
+
+VERSION="$1"
+FILENAME="go$VERSION.linux-amd64.tar.gz"
+LINK="https://storage.googleapis.com/golang/$FILENAME"
+set -e
+
+echo "downloading update file..."
+cd ~/Downloads/apps/
+wget "$LINK"
+
+sudo rm -r /usr/local/go
+echo "removed old version of go"
+
+sudo tar -C /usr/local -xzf "$FILENAME"
+echo "go version $VERSION installed"
+go version
+
+notify-send -u low "Golang Updated" "Go has been successfully updated to version $VERSION"
