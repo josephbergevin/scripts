@@ -1,0 +1,22 @@
+#!/bin/bash
+
+POSa="$1"
+POSx="0"
+POSy="0"
+
+set -e
+
+case "$POSa" in
+
+  left)
+    POSx="1180"
+    xrandr --output HDMI1 --scale 2x2 --pos -1180x0
+    notify-send -u low "Set Resolution" "Resolution set to Scale 2x2, Position: $POSx x $POSy"
+    ;;
+  *)
+    echo "error: $POSa not yet enabled"
+    echo "Available Positions: 'left'"
+    ;;
+
+esac
+
