@@ -52,7 +52,8 @@ case "$SERVER" in
 
 esac
 
-appcfg.py update_"$UPDATE_TYPE" .
+# appcfg.py update_"$UPDATE_TYPE" .
+gcloud --project "$SERVER_NAME" app deploy ./queue.yaml
 notify-send -u normal "$TYPE_MESSAGE Updated for $SERVER_NAME" "User message for slack: $MESSAGE"
 git add "$FILENAME"
 git commit -m"$FILENAME: $MESSAGE"
