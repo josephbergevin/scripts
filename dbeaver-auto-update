@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ~/Downloads/apps
+wget http://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb
+sudo dpkg -i ~/Downloads/apps/dbeaver-ce_latest_amd64.deb
