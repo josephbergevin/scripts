@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -e
+APP="$1"
+LINK=""
+PREFIX=""
+FORMALNAME=""
+
+case "$APP" in
+
+  atom)
+    LINK="https://github.com/atom/atom/releases/latest"
+    PREFIX="atom"
+    FORMALNAME="Atom"
+    ;;
+  dbeaver)
+    LINK="http://dbeaver.jkiss.org/files/dbeaver-ce_latest_amd64.deb"
+    PREFIX="dbeaver"
+    FORMALNAME="D-Beaver"
+    ;;
+  golang)
+    VERSION="$2"
+    FILENAME="go$VERSION.linux-amd64.tar.gz"
+    LINK="https://storage.googleapis.com/golang/$FILENAME"
+
+    echo "downloading update file..."
+    cd ~/Downloads/apps/
+    wget "$LINK"
+
+    sudo rm -r /usr/local/go
+    echo "removed old version of go"
+
+    sudo tar -C /usr/local -xzf "$FILENAME"
+    echo "go version $VERSION installed"
+    go version
+
+    notify-send -u low "Golang Updated" "Go has been successfully updated to version $VERSION"
+    ;;
+  insomnia)
+    LINK="https://builds.insomnia.rest/downloads/ubuntu/latest"
+    PREFIX="insomnia"
+    FORMALNAME="Insomnia"
+    ;;
+  vscode)
+    LINK="https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable"
+    PREFIX="vscode"
+    FORMALNAME="VS-Code"
+    ;;
+  *)
+    echo "Unknown APP given '$APP'"
+    echo "Available types: 'atom', 'dbeaver', 'golang', 'insomnia', 'vscode'"
+    exit 1
+    ;;
+
+esac
+
+if [ "$APP" != "golang" ]
+then
+  cd /home/joseph/Downloads/apps/
+  FILENAME="${PREFIX}_latest_amd64.deb"
+  echo wget "$LINK" -O $FILENAME
+  wget $LINK -O $FILENAME
+  sudo dpkg -i $FILENAME
+  notify-send -u low "$FORMALNAME Updated" "$FORMALNAME has been successfully updated to the latest version"
+fi
+
