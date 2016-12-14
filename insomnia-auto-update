@@ -1,3 +1,4 @@
 #!/bin/bash
-wget -q https://builds.insomnia.rest/downloads/ubuntu/latest -O /tmp/latest
-dpkg -i /tmp/insomnia-*.deb
+
+wget -q https://builds.insomnia.rest/downloads/ubuntu/latest -O ~/Downloads/apps/insomnia_latest_amd64.deb
+sudo dpkg -i ~/Downloads/apps/insomnia_latest_amd64.deb
