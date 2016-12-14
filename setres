@@ -9,9 +9,7 @@ set -e
 case "$POSa" in
 
   left)
-    POSx="1180"
-    xrandr --output HDMI1 --scale 2x2 --pos -1180x0
-    notify-send -u low "Set Resolution" "Resolution set to Scale 2x2, Position: $POSx x $POSy"
+    POSx="1150"
     ;;
   *)
     echo "error: $POSa not yet enabled"
@@ -20,3 +18,6 @@ case "$POSa" in
 
 esac
 
+xrandr --output HDMI1 --scale 2x2
+xrandr --output HDMI1 --pos -"$POSx"x0
+notify-send -u low "Set Resolution" "Resolution set to Scale 2x2, Position: $POSx x $POSy"
