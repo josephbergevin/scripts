@@ -1,4 +1,5 @@
 #!/bin/bash
 
-wget -q https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable -O ~/Downloads/apps/code_latest_amd64.deb
-sudo dpkg -i ~/Downloads/apps/code_latest_amd64.deb
+cd ~/Downloads/apps/
+wget https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable code_latest_amd64.deb
+sudo dpkg -i code_latest_amd64.deb
